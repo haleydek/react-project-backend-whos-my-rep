@@ -6,4 +6,10 @@ class User < ApplicationRecord
     validates :email, uniqueness: true
     validates :email, format: /@/
     validates :first_name, presence: true
+
+    def badge_ids
+        self.badges.map do |badge|
+            badge.id
+        end
+    end
 end
