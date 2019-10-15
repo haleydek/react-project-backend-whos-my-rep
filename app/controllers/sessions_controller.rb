@@ -15,4 +15,10 @@ class SessionsController < ApplicationController
             render json: { :message => "Incorrect email"}
         end
     end
+
+    def destroy
+        session.delete(:user_id)
+
+        render json: { :message => "Successfully logged out."}
+    end
 end
