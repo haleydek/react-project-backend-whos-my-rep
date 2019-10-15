@@ -7,10 +7,8 @@ class SessionsController < ApplicationController
             log_in(user)
 
             render json: user.to_json(
-                :include => {
-                    :badges => { only: [:id] }
-                },
-                except: [:created_at, :updated_at]
+                except: [:created_at, :updated_at],
+                methods: :badge_ids
             )
         else
             render json: { :message => "Incorrect email"}
