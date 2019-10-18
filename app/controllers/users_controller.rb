@@ -3,6 +3,8 @@ class UsersController < ApplicationController
         new_user = User.new(first_name: params[:firstName], email: params[:email])
 
         if new_user.save!
+            log_in(new_user)
+
             render json: new_user.to_json(
                 except: [:created_at, :updated_at],
                 methods: :badge_ids
@@ -16,6 +18,8 @@ class UsersController < ApplicationController
         user = User.find_by(id: params[:id])
 
         if user
+            log_in(user)
+
             render json: user.to_json(
                 except: [:created_at, :updated_at],
                 methods: :badge_ids
