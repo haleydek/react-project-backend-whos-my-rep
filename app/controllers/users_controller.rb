@@ -31,10 +31,10 @@ class UsersController < ApplicationController
 
     def update
         user = User.find_by(id: params[:id])
-        clicked_badge = Badge.find_by(id: params[:badge_id])
+        badge = Badge.find_by(id: params[:badge_id])
 
         if user && badge
-            user.delete_or_add_badge(clicked_badge)
+            user.delete_or_add_badge(badge)
 
             render json: user.badge_ids.to_json
         else
