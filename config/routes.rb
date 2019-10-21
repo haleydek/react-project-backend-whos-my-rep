@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   get '/users/:id', to: 'users#show'
 
   post '/signup', to: 'users#create'
@@ -10,4 +8,6 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   get '/badges', to: 'badges#index'
+
+  patch '/users/:id', to: 'users#update'
 end
