@@ -36,7 +36,7 @@ class UsersController < ApplicationController
         if user && badge
             user.delete_or_add_badge(badge)
 
-            render json: user.badge_ids.to_json
+            render json: user.to_json(only: :id, methods: :badge_ids)
         else
             render json: { :message => "User and/or badge not found" }
         end
