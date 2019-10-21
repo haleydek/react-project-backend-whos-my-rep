@@ -13,10 +13,8 @@ class User < ApplicationRecord
         end
     end
 
-    def delete_or_add_badge(badge_id)
-        badge = self.badges.find_by(id: badge_id)
-
-        if badge
+    def delete_or_add_badge(badge)
+        if self.badges.include?(badge)
             self.badges.delete(badge)
         else
             self.badges << badge
