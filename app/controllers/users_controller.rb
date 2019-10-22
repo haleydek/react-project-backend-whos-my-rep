@@ -14,6 +14,19 @@ class UsersController < ApplicationController
         end
     end
 
+    def update
+        user = User.find_by(id: params[:id])
+        badge = Badge.find_by(id: params[:badge_id])
+
+        if user && badge
+            user.delete_or_add_badge(badge)
+
+            render json: user.to_json(only: :id, methods: :badge_ids)
+        else
+            render json: { :message => "User and/or badge not found" }
+        end
+    end
+
     def show
         user = User.find_by(id: params[:id])
 
@@ -26,19 +39,6 @@ class UsersController < ApplicationController
             )
         else
             render json: { :message => "User not found" }
-        end
-    end
-
-    def update
-        user = User.find_by(id: params[:id])
-        badge = Badge.find_by(id: params[:badge_id])
-
-        if user && badge
-            user.delete_or_add_badge(badge)
-
-            render json: user.to_json(only: :id, methods: :badge_ids)
-        else
-            render json: { :message => "User and/or badge not found" }
         end
     end
 end
