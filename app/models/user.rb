@@ -7,12 +7,6 @@ class User < ApplicationRecord
     validates :email, format: /@/
     validates :first_name, presence: true
 
-    def badge_ids
-        self.badges.map do |badge|
-            badge.id
-        end
-    end
-
     def delete_or_add_badge(badge)
         if self.badges.include?(badge)
             self.badges.delete(badge)
